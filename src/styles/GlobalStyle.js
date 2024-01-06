@@ -6,14 +6,16 @@ const GlobalStyle = createGlobalStyle`
     }
 
     *, *::after, *::before {
+        margin: 0;
+        padding: 0;
         box-sizing: border-box;
+        font-family: 'Jost', sans-serif;
     }
 
     body {
-        font-family: 'Jost', sans-serif;
-        margin: 0 auto;
-        padding: 0;
-        max-width: 1440px;
+        width: 100%;
+        height: 100%;
+        min-height: 100vh;
         font-weight: 400;
         font-size: 1.6rem;
         line-height: 2.6rem;
@@ -21,7 +23,12 @@ const GlobalStyle = createGlobalStyle`
     }
 
     main {
-        padding: 0 10%;
+        margin: 0 5%;
+        max-width: 1111px;
+        margin: 126px auto;
+        @media (max-width: 768px) {
+            margin: 0 0;
+        }
     }
 
     h1, h2, h3, h4, h5, h6, p {
@@ -41,6 +48,8 @@ const GlobalStyle = createGlobalStyle`
     button {
         cursor: pointer;
         border-radius: 8px;
+        border: none;
+        text-transform: uppercase;
     }
 
     input, textarea {

@@ -9,15 +9,9 @@ import IconPinterest from '../assets/shared/desktop/icon-pinterest.svg'
 import IconInstagram from '../assets/shared/desktop/icon-instagram.svg'
 
 const StyledFooter = styled.footer`
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
     background-color: ${props => props.theme.primaryColors.black};
     display: flex;
     justify-content: center;
-
-   
 `
 
 const FooterContent = styled.div`
@@ -25,9 +19,9 @@ const FooterContent = styled.div`
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
-    max-width: 1440px;
+    max-width: 1111px;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 375px) {
         padding: 0;
     }
 `
@@ -36,13 +30,17 @@ const FooterTop = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 144px 10% 40px 10%;
+    padding: 144px 5% 40px 5%;
 
     @media screen and (max-width: 768px) {
+        padding: 80px 5% 40px 5%;
+    }
+
+    @media screen and (max-width: 620px) {
         flex-direction: column;
         align-items: center;
         gap: 40px;
-        padding: 40px 10% 0 10%;
+        padding: 40px 5% 0 5%;
     }
 `
 
@@ -55,7 +53,7 @@ const Logo = styled.div`
         width: 196px;
     }
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 620px) {
         width: 100%;
         height: 100%;
         padding-bottom: 40px;
@@ -80,7 +78,11 @@ const Nav = styled.nav`
             }
         }
 
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: 620px) {
+            margin-bottom: 40px;
+        }
+
+        @media screen and (max-width: 375px) {
             flex-direction: column;
             align-items: center;
             gap: 32px;
@@ -98,7 +100,7 @@ const StyledLink = styled(Link)`
 `
 
 const FooterBottom = styled.div`
-    padding: 30px 10% 70px 10%;
+    padding: 30px 5% 70px 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -106,11 +108,15 @@ const FooterBottom = styled.div`
     border-top: 1px solid ${props => props.theme.secondaryColors.darkGrey};
 
     @media screen and (max-width: 768px) {
+        padding: 30px 5% 70px 5%;
+    }
+
+    @media screen and (max-width: 620px) {
         flex-direction: column;
         align-items: center;
         gap: 40px;
         border-top: transparent;
-        padding: 0 10% 70px 10%;
+        padding: 0 5% 70px 5%;
     }
 `
 
@@ -127,7 +133,7 @@ const FooterInfo = styled.div`
         line-height: 2.6rem;
     }
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 375px) {
         align-items: center;
     }
 `

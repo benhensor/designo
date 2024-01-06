@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import LogoDark from '../assets/shared/desktop/logo-dark.png'
@@ -6,18 +6,29 @@ import IconClose from '../assets/shared/mobile/icon-close.svg'
 import IconBurger from '../assets/shared/mobile/icon-hamburger.svg'
 
 const StyledHeader = styled.header`
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: ${props => props.scrolled ? '95px' : '125px'};
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    background: ${props => props.theme.primaryColors.white};
+    z-index: 100;
+    transition: height 0.1s ease-in-out;
+
+    @media screen and (max-width: 768px) {
+        padding: 35px 5%;
+    }
+`
+
+const HeaderContent = styled.div`
+    position: relative;
+    width: 100%;
+    max-width: 1111px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 65px 10%;
-    background: ${props => props.theme.primaryColors.white};
-    width: 100%;
-    position: relative;
-    z-index: 100 !important;
-
-    @media screen and (max-width: 768px) {
-        padding: 35px 10%;
-    }
 `
 
 const Logo = styled.div`
@@ -90,7 +101,7 @@ const MobileMenu = styled.div`
     padding-left: 10%;
     transform: translateY(${props => props.$isOpen ? '95px' : '-100%'});
     opacity: ${props => props.$isOpen ? '1' : '0'};
-    z-index: 1 !important;
+    z-index: 1;
     transition: all 0.15s ease-in-out;
 
     @media screen and (min-width: 768px) {
@@ -121,35 +132,53 @@ const MobileNav = styled.nav`
 export default function Header() {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const [scroll, setScroll] = useState(0)
+
+    useEffect(() => {
+        const onScroll = () => {
+            const scrollCheck = window.scrollY > 150
+            if (scrollCheck !== scroll) {
+                setScroll(scrollCheck)
+            }
+        }
+        document.addEventListener('scroll', onScroll)
+        return () => {
+            document.removeEventListener('scroll', onScroll)
+        }
+    }, [scroll])
+
+
 
     const handleClicked = () => {
         setIsMenuOpen(!isMenuOpen)
     }
    
-  return (<>
-        <StyledHeader >
-            <Logo>
-                <Link to='/'><img src={LogoDark} alt="Designo logo" /></Link> 
-            </Logo>
-            <Nav>
-                <ul>
-                    <li><StyledLink to='/about'>Our Company</StyledLink></li>
-                    <li><StyledLink to='/locations'>Locations</StyledLink></li>
-                    <li><StyledLink to='/contact'>Contact</StyledLink></li>
-                </ul>
-            </Nav>
-            <MenuControls onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                {isMenuOpen ? <img src={IconClose} alt="Close menu" /> : <img src={IconBurger} alt="Open menu" />}
-            </MenuControls>
-        </StyledHeader>
-        <MobileMenu $isOpen={isMenuOpen}>
-                <MobileNav>
+  return (
+        <StyledHeader scrolled={scroll}>
+            <HeaderContent>
+                <Logo>
+                    <Link to='/'><img src={LogoDark} alt='Designo logo' /></Link> 
+                </Logo>
+                <Nav>
                     <ul>
-                        <li onClick={handleClicked}><StyledLink to='/about'>Our Company</StyledLink></li>
-                        <li onClick={handleClicked}><StyledLink to='/locations'>Locations</StyledLink></li>
-                        <li onClick={handleClicked}><StyledLink to='/contact'>Contact</StyledLink></li>
+                        <li><StyledLink to='/about'>Our Company</StyledLink></li>
+                        <li><StyledLink to='/locations'>Locations</StyledLink></li>
+                        <li><StyledLink to='/contact'>Contact</StyledLink></li>
                     </ul>
-                </MobileNav>
-            </MobileMenu>       
-        </>)
+                </Nav>
+                <MenuControls onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                    {isMenuOpen ? <img src={IconClose} alt='Close menu' /> : <img src={IconBurger} alt='Open menu' />}
+                </MenuControls>
+                <MobileMenu $isOpen={isMenuOpen}>
+                    <MobileNav>
+                        <ul>
+                            <li onClick={handleClicked}><StyledLink to='/about'>Our Company</StyledLink></li>
+                            <li onClick={handleClicked}><StyledLink to='/locations'>Locations</StyledLink></li>
+                            <li onClick={handleClicked}><StyledLink to='/contact'>Contact</StyledLink></li>
+                        </ul>
+                    </MobileNav>
+                </MobileMenu> 
+            </HeaderContent>
+        </StyledHeader>      
+    )
 }
