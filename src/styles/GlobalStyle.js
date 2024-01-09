@@ -23,11 +23,13 @@ const GlobalStyle = createGlobalStyle`
     }
 
     main {
-        margin: 0 5%;
         max-width: 1111px;
-        margin: 126px auto;
+        margin: 126px auto 0 auto;
+        @media (max-width: 1199px) {
+            margin: 126px 5% 0 5%;
+        }
         @media (max-width: 768px) {
-            margin: 0 0;
+            margin: 100px 0 0 0;
         }
     }
 
@@ -86,6 +88,10 @@ const GlobalStyle = createGlobalStyle`
 
     p {
         font-weight: 400;
+    }
+
+    section {
+        margin-top: 140px;
     }
 `
 

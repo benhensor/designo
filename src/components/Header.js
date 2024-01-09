@@ -9,15 +9,15 @@ const StyledHeader = styled.header`
     position: fixed;
     top: 0;
     width: 100vw;
-    height: ${props => props.scrolled ? '95px' : '125px'};
+    height: ${props => props.$scrolled ? '95px' : '125px'};
     display: flex;
     justify-content: center;
     margin: 0 auto;
     background: ${props => props.theme.primaryColors.white};
     z-index: 100;
-    transition: height 0.1s ease-in-out;
+    transition: height 0.25s ease-in-out;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1199px) {
         padding: 35px 5%;
     }
 `
@@ -154,7 +154,7 @@ export default function Header() {
     }
    
   return (
-        <StyledHeader scrolled={scroll}>
+        <StyledHeader $scrolled={scroll}>
             <HeaderContent>
                 <Logo>
                     <Link to='/'><img src={LogoDark} alt='Designo logo' /></Link> 

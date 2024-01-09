@@ -6,6 +6,7 @@ const primaryColors = {
 
 const secondaryColors = {
     lightPeach: '#FFAD9B',
+    lighterPeach: '#FDF3F0',
     darkGrey: '#333136',
     lightGrey: '#F1F3F5',
 }

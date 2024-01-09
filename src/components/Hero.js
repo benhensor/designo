@@ -2,38 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
-import Leaf from '../assets/shared/desktop/bg-pattern-leaf.svg'
 import HeroPhone from '../assets/home/desktop/image-hero-phone.png'
-
-const HomeBackground = styled.div`
-    z-index: -1;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
-    margin: 475px 0;
-    div {
-        display: flex;
-        width: 100%;
-    }
-    div:nth-child(2) {
-        justify-content: flex-start;
-        transform: rotate(180deg);
-    }
-    img {
-        width: 1000px;
-        height: auto;
-    }
-
-    @media screen and (max-width: 768px) {
-        display: none;
-    }
-`
 
 const Hero = styled.div`
     position: relative;
@@ -129,10 +98,6 @@ const HeroImage = styled(motion.div)`
 export default function Home() {
     return (
             <Hero>
-                <HomeBackground>
-                    <div><img src={Leaf} alt="leaf pattern" /></div>
-                    <div><img src={Leaf} alt="leaf pattern" /></div>
-                </HomeBackground>
                 <HeroBG
                     initial={{ opacity: 0, y: -200 }}
                     animate={{ opacity: 1, y: 0 }}

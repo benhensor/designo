@@ -30,17 +30,21 @@ const FooterTop = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 144px 5% 40px 5%;
+    padding: 144px 0 40px 0;
+
+    @media screen and (max-width: 1199px) {
+        padding: 140px 5% 70px 5%;
+    }
 
     @media screen and (max-width: 768px) {
-        padding: 80px 5% 40px 5%;
+        padding: 140px 5% 40px 5%;
     }
 
     @media screen and (max-width: 620px) {
         flex-direction: column;
         align-items: center;
         gap: 40px;
-        padding: 40px 5% 0 5%;
+        padding: 140px 5% 0 5%;
     }
 `
 
@@ -100,12 +104,16 @@ const StyledLink = styled(Link)`
 `
 
 const FooterBottom = styled.div`
-    padding: 30px 5% 70px 5%;
+    padding: 30px 0 70px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     border-top: 1px solid ${props => props.theme.secondaryColors.darkGrey};
+
+    @media screen and (max-width: 1199px) {
+        padding: 30px 5% 70px 5%;
+    }
 
     @media screen and (max-width: 768px) {
         padding: 30px 5% 70px 5%;
