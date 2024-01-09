@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import { ReactComponent as Canada } from '../assets/shared/desktop/illustration-canada.svg'
 import { ReactComponent as Australia } from '../assets/shared/desktop/illustration-australia.svg'
 import { ReactComponent as UnitedKingdom } from '../assets/shared/desktop/illustration-united-kingdom.svg'
@@ -8,17 +9,19 @@ import Circle from '../assets/shared/desktop/bg-pattern-small-circle.svg'
 const LocationSelectContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 32px;
-    margin: 160px 0;
+    
+    margin-bottom: 160px;
+    width: 100%;
     
 
-    @media (max-width: 768px) {
+    @media (max-width: 809px) {
         grid-template-columns: 1fr;
-        margin: 80px 5%;
+        margin: 0 5% 80px 5%;
     }
 
     @media (max-width: 559px) {
         gap: 48px;
+        margin: 80px 5%;
     }
 `
 
@@ -28,18 +31,9 @@ const Location = styled.div`
     justify-content: flex-start;
     align-items: center;
     text-align: center;
-    gap: 48px;
+    gap: 40px;
     h3 {
         text-transform: uppercase;
-    }
-
-    @media (max-width: 768px) {
-        flex-direction: row;
-    }
-
-    @media (max-width: 559px) {
-        flex-direction: column;
-        
     }
 `
 
@@ -64,7 +58,7 @@ const ImgContainer = styled.div`
     align-items: center;
 `
 
-const LocationButton = styled.button`
+const LocationButton = styled(Link)`
     background-color: ${props => props.theme.primaryColors.peach};
     color: ${props => props.theme.primaryColors.white};
     padding: 18px 24px;
@@ -91,7 +85,7 @@ export default function LocationSelect() {
                     <Canada />
                 </ImgContainer>
                 <h3>Canada</h3>
-                <LocationButton>See Location</LocationButton>               
+                <LocationButton to='/locations'>See Location</LocationButton>               
             </Location>
             <Location>
                 <ImgContainer>
@@ -99,7 +93,7 @@ export default function LocationSelect() {
                     <Australia />
                 </ImgContainer>
                 <h3>Australia</h3>
-                <LocationButton>See Location</LocationButton>
+                <LocationButton to='/locations'>See Location</LocationButton>
             </Location>
             <Location>
                 <ImgContainer>
@@ -107,7 +101,7 @@ export default function LocationSelect() {
                     <UnitedKingdom />
                 </ImgContainer>
                 <h3>United Kingdom</h3>
-                <LocationButton>See Location</LocationButton>
+                <LocationButton to='/locations'>See Location</LocationButton>
             </Location>
         </LocationSelectContainer>
     )

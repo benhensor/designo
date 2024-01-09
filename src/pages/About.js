@@ -20,63 +20,111 @@ const AboutContainer = styled.section`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 160px;
+    
+
+    @media (max-width: 768px) {
+        margin: 0; 
+        gap: 80px;          
+    }
+    @media (max-width: 375px) {
+        gap: 0;       
+    }
 `
 
-const AboutHeroContainer = styled.div`
-    display: grid;
-    grid-template-columns: 5.5fr 4.5fr;
+const AboutCard = styled.div`
+    display: flex;
+    flex-direction: ${props => {
+        if (props.$id === 'first' || props.$id === 'third') return 'row';
+        if (props.$varidiant === 'second') return 'row-reverse';
+        return 'row';
+    
+    }};
     border-radius: 15px;
     overflow: hidden;
-    color: ${props => props.theme.primaryColors.white};
+    margin-bottom: 160px;
+
+    @media (max-width: 768px) {
+        border-radius: 0;
+        flex-direction: ${props => {
+            if (props.$id === 'first' || props.$id === 'third') return 'column-reverse';
+            if (props.$id === 'second') return 'column-reverse';
+            return 'row';
+        
+        }};
+        margin-bottom: 80px;
+    }
+
+    @media (max-width: 375px) {
+        margin-bottom: 0;
+    }
 `
 
-const ImgContainer = styled.div`
-    width: 100%;
-    height: 100%;
+const Img = styled.div`
+    flex: 40%;
+    object-fit: cover;
+
+
     img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        object-position: center;
-        object-repeat: no-repeat;
+    }
+
+    @media (max-width: 768px) {
+        flex: 1;
     }
 `
 
-
-const HeroInfoContainer = styled.div`
-    background-image: url(${props => props.$patternBG});
+const Info = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 60%;
+    background: ${props => {
+        if (props.$id === 'first') return `url(${props.$patternBG})`;
+        if (props.$id === 'second' || props.$id === 'third') return null;
+    }};
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    background-color: ${props => props.theme.primaryColors.peach};
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 0px 95px 0 95px;
-    gap: 40px;
-    z-index: 10;
-`
-
-const InfoCard = styled.div`
-    display: grid;
-    grid-template-columns: 4.5fr 5.5fr;
-    border-radius: 15px;
-    overflow: hidden;
-    max-height: 584px;
-`
-
-const InfoContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    background-color: ${props => props.theme.secondaryColors.lighterPeach};
-    gap: 40px;
-    padding: 0 95px;
+    background-color: ${props => {
+        if (props.$id === 'first') return props.theme.primaryColors.peach;
+        if (props.$id === 'second' || props.$id === 'third') return props.theme.secondaryColors.lighterPeach;
+        return 'white';
+    }};
+    color: ${props => {
+        if (props.$id === 'first') return props.theme.primaryColors.white;
+        if (props.$id === 'second' || props.$id === 'third') return props.theme.primaryColors.black;
+        return 'white';
+    }};
+    padding: 57px 10%;
+    gap: 24px;
+    h1 {
+        color: ${props => props.theme.primaryColors.white};
+    }
     h2 {
         color: ${props => props.theme.primaryColors.peach};
+    }
+
+    @media (max-width: 768px) {
+        flex: 1;
+        align-items: center;
+        text-align: center;
+        padding: 57px 0;
+        h1, h2, p {
+            padding: 0 10%;
+        }
+    
+    }
+
+    @media (max-width: 375px) {
+        h1, h2 {
+            font-size: 3.2rem;
+            line-height: 3.4rem;
+        }
+        p {
+            font-size: 1.5rem;
+        }
     }
 `
 
@@ -124,38 +172,38 @@ export default function About() {
 
     return (
         <AboutContainer>
-            <AboutHeroContainer >
-                <HeroInfoContainer $patternImg={patternBG}>
+            <AboutCard $id="first">
+                <Info $id="first" $patternBG={patternBG}>
                     <h1>About Us</h1>
                     <p>Founded in 2010, we are a creative agency that produces lasting results for our clients. We’ve partnered with many startups, corporations, and nonprofits alike to craft designs that make real impact. We’re always looking forward to creating brands, products, and digital experiences that connect with our clients’ audiences.</p>
-                </HeroInfoContainer>
-                <ImgContainer>
-                    <img src={heroImg} alt="Team working on computers" />
-                </ImgContainer>
-            </AboutHeroContainer>
-            <InfoCard>
-                <ImgContainer>
-                    <img src={worldClassImg} alt="Woman appraising images" />
-                </ImgContainer>
-                <InfoContainer>
+                </Info>
+                <Img>
+                    <img src={heroImg} alt="Team meeting" />
+                </Img>
+            </AboutCard>
+            <AboutCard $id="second">
+                <Info $id="second" $patternBG={patternBG}>
                     <h2>World-class talent</h2>
                     <p>We are a crew of strategists, problem-solvers, and technologists. Every design is thoughtfully crafted from concept to launch, ensuring success in its given market. We are constantly updating our skills in a myriad of platforms.   </p>
                     <p>Our team is multi-disciplinary and we are not merely interested in form — content and meaning are just as important. We give great importance to craftsmanship, service, and prompt delivery. Clients have always been impressed with our high-quality outcomes that encapsulates their brand’s story and mission.</p>
-                </InfoContainer>
-            </InfoCard>
+                </Info>
+                <Img>
+                    <img src={worldClassImg} alt="Woman appraising images" />
+                </Img>
+            </AboutCard>
 
             <LocationSelect />
 
-            <InfoCard>
-                <InfoContainer>
+            <AboutCard $id="third">
+                <Info $id="third" $patternBG={patternBG}>
                     <h2>The real deal</h2>
                     <p>As strategic partners in our clients’ businesses, we are ready to take on any challenge as our own. Solving real problems require empathy and collaboration, and we strive to bring a fresh perspective to every opportunity. We make design and technology more accessible and give you tools to measure success.</p>
                     <p>We are visual storytellers in appealing and captivating ways. By combining business and marketing strategies, we inspire audiences to take action and drive real results.</p>
-                </InfoContainer>
-                <ImgContainer>
+                </Info>
+                <Img>
                     <img src={realDealImg} alt="Woman's hands touching photograph" />
-                </ImgContainer>
-            </InfoCard>
+                </Img>
+            </AboutCard>
 
             <CallToAction />
         </AboutContainer>

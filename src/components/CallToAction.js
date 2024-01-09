@@ -60,6 +60,7 @@ const InfoContainer = styled.div`
     flex-direction: column;
     align-items: flex-start;
     padding: 72px 0;
+    z-index: 1000;
     h2, p {
         padding: 0 10%;
     }

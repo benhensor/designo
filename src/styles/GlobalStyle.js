@@ -29,7 +29,7 @@ const GlobalStyle = createGlobalStyle`
             margin: 126px 5% 0 5%;
         }
         @media (max-width: 768px) {
-            margin: 100px 0 0 0;
+            margin: 130px 0 0 0;
         }
     }
 
