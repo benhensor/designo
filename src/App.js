@@ -24,7 +24,6 @@ function App() {
         <Router>
             <Header/>
             <ScrollToTop />
-            <main>
             <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/web-design" element={<WebDesign />} />
@@ -34,7 +33,6 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             </Routes>
-            </main>
             <Footer />
         </Router>
         </ThemeProvider>

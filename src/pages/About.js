@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import UseMediaQuery from '../hooks/UseMediaQuery'
 import CallToAction from '../components/CallToAction'
 import LocationSelect from '../components/LocationSelect'
@@ -15,16 +16,22 @@ import AboutRealDealMobile from '../assets/about/mobile/image-real-deal.jpg'
 import PatternDesktop from '../assets/about/desktop/bg-pattern-hero-about-desktop.svg'
 import PatternMobile from '../assets/about/mobile/bg-pattern-hero-about-mobile.svg'
 
-const AboutContainer = styled.section`
+const AboutContainer = styled.main`
+    max-width: 1111px;
+    margin: 125px auto 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
+    @media (max-width: 1199px) {
+        margin: 125px 5% 0 5%;
+    }
     @media (max-width: 768px) {
-        margin: 0;          
+        margin: 125px 0 0 0;         
     }
     @media (max-width: 375px) {
+        margin: 95px 0 0 0 ;
         gap: 0;       
     }
 `
@@ -171,41 +178,52 @@ export default function About() {
     }
 
     return (
-        <AboutContainer>
-            <AboutCard $id="first">
-                <Info $id="first" $patternBG={patternBG}>
-                    <h1>About Us</h1>
-                    <p>Founded in 2010, we are a creative agency that produces lasting results for our clients. We’ve partnered with many startups, corporations, and nonprofits alike to craft designs that make real impact. We’re always looking forward to creating brands, products, and digital experiences that connect with our clients’ audiences.</p>
-                </Info>
-                <Img>
-                    <img src={heroImg} alt="Team meeting" />
-                </Img>
-            </AboutCard>
-            <AboutCard $id="second">
-                <Info $id="second" $patternBG={patternBG}>
-                    <h2>World-class talent</h2>
-                    <p>We are a crew of strategists, problem-solvers, and technologists. Every design is thoughtfully crafted from concept to launch, ensuring success in its given market. We are constantly updating our skills in a myriad of platforms.   </p>
-                    <p>Our team is multi-disciplinary and we are not merely interested in form — content and meaning are just as important. We give great importance to craftsmanship, service, and prompt delivery. Clients have always been impressed with our high-quality outcomes that encapsulates their brand’s story and mission.</p>
-                </Info>
-                <Img>
-                    <img src={worldClassImg} alt="Woman appraising images" />
-                </Img>
-            </AboutCard>
+        <HelmetProvider>
+            <Helmet>
+                <title>Designo | About Us</title>
+                <meta name="author" content="Ben Hensor"/>
+                <meta name="description" 
+                content="About page for Designo - Where we bring ideas to life!"
+                />
+            </Helmet>
 
-            <LocationSelect />
+            <AboutContainer>
+                <AboutCard $id="first">
+                    <Info $id="first" $patternBG={patternBG}>
+                        <h1>About Us</h1>
+                        <p>Founded in 2010, we are a creative agency that produces lasting results for our clients. We’ve partnered with many startups, corporations, and nonprofits alike to craft designs that make real impact. We’re always looking forward to creating brands, products, and digital experiences that connect with our clients’ audiences.</p>
+                    </Info>
+                    <Img>
+                        <img src={heroImg} alt="Team meeting" />
+                    </Img>
+                </AboutCard>
+                <AboutCard $id="second">
+                    <Info $id="second" $patternBG={patternBG}>
+                        <h2>World-class talent</h2>
+                        <p>We are a crew of strategists, problem-solvers, and technologists. Every design is thoughtfully crafted from concept to launch, ensuring success in its given market. We are constantly updating our skills in a myriad of platforms.   </p>
+                        <p>Our team is multi-disciplinary and we are not merely interested in form — content and meaning are just as important. We give great importance to craftsmanship, service, and prompt delivery. Clients have always been impressed with our high-quality outcomes that encapsulates their brand’s story and mission.</p>
+                    </Info>
+                    <Img>
+                        <img src={worldClassImg} alt="Woman appraising images" />
+                    </Img>
+                </AboutCard>
 
-            <AboutCard $id="third">
-                <Info $id="third" $patternBG={patternBG}>
-                    <h2>The real deal</h2>
-                    <p>As strategic partners in our clients’ businesses, we are ready to take on any challenge as our own. Solving real problems require empathy and collaboration, and we strive to bring a fresh perspective to every opportunity. We make design and technology more accessible and give you tools to measure success.</p>
-                    <p>We are visual storytellers in appealing and captivating ways. By combining business and marketing strategies, we inspire audiences to take action and drive real results.</p>
-                </Info>
-                <Img>
-                    <img src={realDealImg} alt="Woman's hands touching photograph" />
-                </Img>
-            </AboutCard>
+                <LocationSelect />
 
-            <CallToAction />
-        </AboutContainer>
+                <AboutCard $id="third">
+                    <Info $id="third" $patternBG={patternBG}>
+                        <h2>The real deal</h2>
+                        <p>As strategic partners in our clients’ businesses, we are ready to take on any challenge as our own. Solving real problems require empathy and collaboration, and we strive to bring a fresh perspective to every opportunity. We make design and technology more accessible and give you tools to measure success.</p>
+                        <p>We are visual storytellers in appealing and captivating ways. By combining business and marketing strategies, we inspire audiences to take action and drive real results.</p>
+                    </Info>
+                    <Img>
+                        <img src={realDealImg} alt="Woman's hands touching photograph" />
+                    </Img>
+                </AboutCard>
+
+                <CallToAction />
+            </AboutContainer>
+
+        </HelmetProvider>
     )
 }

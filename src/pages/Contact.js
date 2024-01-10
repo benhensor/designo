@@ -1,21 +1,32 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import styled from "styled-components";
-import ModalAlert from "../components/ModalAlert";
-import ContactPattern from "../assets/contact/desktop/bg-pattern-hero-desktop.svg";
-import LocationSelect from "../components/LocationSelect";
-import Leaf from "../assets/shared/desktop/bg-pattern-leaf.svg";
-import {ReactComponent as Error } from "../assets/contact/desktop/icon-error.svg";
+import React, { useState } from "react"
+import { useForm } from "react-hook-form"
+import { Helmet, HelmetProvider } from "react-helmet-async"
+import styled from "styled-components"
+import ModalAlert from "../components/ModalAlert"
+import ContactPattern from "../assets/contact/desktop/bg-pattern-hero-desktop.svg"
+import LocationSelect from "../components/LocationSelect"
+import Leaf from "../assets/shared/desktop/bg-pattern-leaf.svg"
+import {ReactComponent as Error } from "../assets/contact/desktop/icon-error.svg"
 
-const ContactContainer = styled.section`
+const ContactContainer = styled.main`
+	max-width: 1111px;
+	margin: 125px auto 0 auto;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: 100%;
+	@media (max-width: 1199px) {
+		margin: 125px 5% 0 5%;
+	}
+	@media (max-width: 768px) {
+		margin: 125px 0 0 0;
+	}
+	@media (max-width: 375px) {
+		margin: 95px 0 0 0;
+	}
 `
 
 const ContactBackground = styled.div`
-	z-index: 0;
+	z-index: -1;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -44,7 +55,7 @@ const ContactBackground = styled.div`
 	@media screen and (max-width: 768px) {
 		display: none;
 	}
-`;
+`
 
 const ContactHero = styled.div`
 	background: url(${ContactPattern});
@@ -201,104 +212,113 @@ export default function Contact() {
 	};
 
 	return (
-		<ContactContainer>
-			<ContactBackground>
-				<div>
-					<img src={Leaf} alt="leaf pattern" />
-				</div>
-				<div>
-					<img src={Leaf} alt="leaf pattern" />
-				</div>
-			</ContactBackground>
-			<ContactHero>
-				<Info>
-					<h1>Contact Us</h1>
-					<p>
-						Ready to take it to the next level? Let’s talk about
-						your project or idea and find out how we can help your
-						business grow. If you are looking for unique digital
-						experiences that’s relatable to your users, drop us a
-						line.
-					</p>
-				</Info>
-				<ContactForm
-					action="#"
-					onSubmit={handleSubmit(handleRegistration, handleError)}
-				>
-					<InputWrapper>
-						<label htmlFor="name">Name</label>
-						<input
-							type="text"
-							name="name"
-							id="name"
-							placeholder="Name"
-							aria-invalid={errors.name ? 'true' : 'false'}
-							{...register('name', registerOptions.name)}
-						/>
-						{errors.name && <ErrorMessage role="alert">{errors.name.message}<Error style={{ marginLeft: '8px' }}/></ErrorMessage>}
-					</InputWrapper>
-					<InputWrapper>
-						<label htmlFor="email">Email</label>
-						<input
-							type="email"
-							name="email"
-							id="email"
-							placeholder="Email Address"
-							aria-invalid={errors.email ? 'true' : 'false'}
-							{...register('email', registerOptions.email)}
-						/>
-						{errors.email && <ErrorMessage role="alert">{errors.email.message}<Error style={{ marginLeft: '8px' }}/></ErrorMessage>}
-					</InputWrapper>
-					<InputWrapper>
-						<label htmlFor="phone">Phone Number</label>
-						<input
-							type="tel"
-							name="phone"
-							id="phone"
-							placeholder="Phone"
-							aria-invalid={errors.phone ? 'true' : 'false'}
-							{...register('phone', registerOptions.phone)}
-						/>
-						{errors.phone && <ErrorMessage role="alert">{errors.phone.message}<Error style={{ marginLeft: '8px' }}/></ErrorMessage>}
-					</InputWrapper>
-					<InputWrapper>	
-						<label htmlFor="message">Message</label>
-						<textarea
-							name="message"
-							id="message"
-							cols="10"
-							rows="5"
-							placeholder="Your Message"
-							aria-invalid={errors.message ? 'true' : 'false'}
-							{...register('message', registerOptions.message)}
-						/>
-                    	{errors.message && <ErrorMessage role="alert">{errors.message.message}<Error style={{ marginLeft: '8px' }}/></ErrorMessage>}
-					</InputWrapper>
+		<HelmetProvider>
+			<Helmet>
+                <title>Designo | Contact</title>
+                <meta name="author" content="Ben Hensor"/>
+                <meta name="description" 
+				content="Contact page for Designo - Where we bring ideas to life!"
+                />
+            </Helmet>
+			<ContactContainer>
+				<ContactBackground>
 					<div>
-						<Button
-							type="submit"
-							aria-label="Submit"
-							Submit
-						>
-							Submit
-						</Button>
+						<img src={Leaf} alt="leaf pattern" />
 					</div>
-					
-				</ContactForm>
-			</ContactHero>
+					<div>
+						<img src={Leaf} alt="leaf pattern" />
+					</div>
+				</ContactBackground>
+				<ContactHero>
+					<Info>
+						<h1>Contact Us</h1>
+						<p>
+							Ready to take it to the next level? Let’s talk about
+							your project or idea and find out how we can help your
+							business grow. If you are looking for unique digital
+							experiences that’s relatable to your users, drop us a
+							line.
+						</p>
+					</Info>
+					<ContactForm
+						action="#"
+						onSubmit={handleSubmit(handleRegistration, handleError)}
+					>
+						<InputWrapper>
+							<label htmlFor="name">Name</label>
+							<input
+								type="text"
+								name="name"
+								id="name"
+								placeholder="Name"
+								aria-invalid={errors.name ? 'true' : 'false'}
+								{...register('name', registerOptions.name)}
+							/>
+							{errors.name && <ErrorMessage role="alert">{errors.name.message}<Error style={{ marginLeft: '8px' }}/></ErrorMessage>}
+						</InputWrapper>
+						<InputWrapper>
+							<label htmlFor="email">Email</label>
+							<input
+								type="email"
+								name="email"
+								id="email"
+								placeholder="Email Address"
+								aria-invalid={errors.email ? 'true' : 'false'}
+								{...register('email', registerOptions.email)}
+							/>
+							{errors.email && <ErrorMessage role="alert">{errors.email.message}<Error style={{ marginLeft: '8px' }}/></ErrorMessage>}
+						</InputWrapper>
+						<InputWrapper>
+							<label htmlFor="phone">Phone Number</label>
+							<input
+								type="tel"
+								name="phone"
+								id="phone"
+								placeholder="Phone"
+								aria-invalid={errors.phone ? 'true' : 'false'}
+								{...register('phone', registerOptions.phone)}
+							/>
+							{errors.phone && <ErrorMessage role="alert">{errors.phone.message}<Error style={{ marginLeft: '8px' }}/></ErrorMessage>}
+						</InputWrapper>
+						<InputWrapper>	
+							<label htmlFor="message">Message</label>
+							<textarea
+								name="message"
+								id="message"
+								cols="10"
+								rows="5"
+								placeholder="Your Message"
+								aria-invalid={errors.message ? 'true' : 'false'}
+								{...register('message', registerOptions.message)}
+							/>
+							{errors.message && <ErrorMessage role="alert">{errors.message.message}<Error style={{ marginLeft: '8px' }}/></ErrorMessage>}
+						</InputWrapper>
+						<div>
+							<Button
+								type="submit"
+								aria-label="Submit"
+								Submit
+							>
+								Submit
+							</Button>
+						</div>
+						
+					</ContactForm>
+				</ContactHero>
 
-            <ModalAlert show={showModal} onCLose={handleCloseModal}>
-                <h2>Thanks for viewing!</h2>
-                <p>Thanks for viewing my solution! I hope you enjoyed it.</p>
-                <p>If you'd like to get in touch, please visit my 
-                   <a href="https://benhensordev.netlify.app/#connect" target="__blank" rel="noopener noreferrer"
-				   style={{ color: '#E7816B', textDecoration: 'none' }}
-				   > <strong>WEBSITE</strong></a>.
-                </p>
-                <Button onClick={handleCloseModal} style={{ width: '200px'}}>Close</Button>
-            </ModalAlert>
+				<ModalAlert show={showModal} onCLose={handleCloseModal}>
+					<h2>Thanks for viewing!</h2>
+					<p>Thanks for viewing my solution! I hope you enjoyed it.</p>
+					<p>If you'd like to get in touch, please visit my 
+					<a href="https://benhensordev.netlify.app/#connect" target="__blank" rel="noopener noreferrer"
+					style={{ color: '#E7816B', textDecoration: 'none' }}
+					> <strong>WEBSITE</strong></a>.
+					</p>
+					<Button onClick={handleCloseModal} style={{ width: '200px'}}>Close</Button>
+				</ModalAlert>
 
-			<LocationSelect />
-		</ContactContainer>
-	);
+				<LocationSelect />
+			</ContactContainer>
+		</HelmetProvider>
+	)
 }

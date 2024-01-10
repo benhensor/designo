@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import styled from 'styled-components'
 import PageHeader from '../components/PageHeader'
 import ProjectCard from '../components/ProjectCard'
@@ -11,6 +12,20 @@ import Photon from '../assets/web-design/desktop/image-photon.jpg'
 import Builder from '../assets/web-design/desktop/image-builder.jpg'
 import Blogr from '../assets/web-design/desktop/image-blogr.jpg'
 import Camp from '../assets/web-design/desktop/image-camp.jpg'
+
+const WebDesignContainer = styled.main`
+    max-width: 1111px;
+    margin: 125px auto 0 auto;
+    @media (max-width: 1199px) {
+        margin: 125px 5% 0 5%;
+    }
+    @media (max-width: 768px) {
+        margin: 125px 0 0 0;
+    }
+    @media (max-width: 375px) {
+        margin: 95px 0 0 0 ;
+    }
+`
 
 const Projects = styled.div`
     display: grid;
@@ -44,26 +59,33 @@ const PagePreview = styled.div`
 
 export default function WebDesign() {
     return (
-        <section>
-            <PageHeader 
-                title="Web Design"
-                byline="We build websites that serve as powerful marketing tools and bring memorable brand experiences." 
-            />
-            <Projects>
-                <ProjectCard image={Express} title="Express" description="A multi-carrier shipping website for ecommerce businesses"/>
-                <ProjectCard image={Transfer} title="Transfer" description="Site for low-cost money transfers and sending money within seconds"/>
-                <ProjectCard image={Photon} title="Photon" description="A state-of-the-art music player with high-resolution audio and DSP effects"/>
-                <ProjectCard image={Builder} title="Builder" description="Connects users with local contractors based on their location"/>
-                <ProjectCard image={Blogr} title="Blogr" description="Blogr is a platform for creating an online blog or publication"/>
-                <ProjectCard image={Camp} title="Camp" description="Get expert training in coding, data, design, and digital marketing"/>
-            </Projects>
+        <HelmetProvider>
+            <Helmet>
+                <title>Web Design | Arch Studio</title>
+                <meta name="author" content="Ben Hensor" />
+                <meta name="description" content="We build websites that serve as powerful marketing tools and bring memorable brand experiences." />
+            </Helmet>
+            <WebDesignContainer>
+                <PageHeader 
+                    title="Web Design"
+                    byline="We build websites that serve as powerful marketing tools and bring memorable brand experiences." 
+                />
+                <Projects>
+                    <ProjectCard image={Express} title="Express" description="A multi-carrier shipping website for ecommerce businesses"/>
+                    <ProjectCard image={Transfer} title="Transfer" description="Site for low-cost money transfers and sending money within seconds"/>
+                    <ProjectCard image={Photon} title="Photon" description="A state-of-the-art music player with high-resolution audio and DSP effects"/>
+                    <ProjectCard image={Builder} title="Builder" description="Connects users with local contractors based on their location"/>
+                    <ProjectCard image={Blogr} title="Blogr" description="Blogr is a platform for creating an online blog or publication"/>
+                    <ProjectCard image={Camp} title="Camp" description="Get expert training in coding, data, design, and digital marketing"/>
+                </Projects>
 
-            <PagePreview>
-                <PageCardApp />
-                <PageCardGraphic />
-            </PagePreview>
+                <PagePreview>
+                    <PageCardApp />
+                    <PageCardGraphic />
+                </PagePreview>
 
-            <CallToAction />
-        </section>
+                <CallToAction />
+            </WebDesignContainer>
+        </HelmetProvider>
     )
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import styled from 'styled-components'
 import PageHeader from '../components/PageHeader'
 import ProjectCard from '../components/ProjectCard'
@@ -8,6 +9,20 @@ import CallToAction from '../components/CallToAction'
 import Change from '../assets/graphic-design/desktop/image-change.jpg'
 import Boxed from '../assets/graphic-design/desktop/image-boxed-water.jpg'
 import Science from '../assets/graphic-design/desktop/image-science.jpg'
+
+const GraphicDesignContainer = styled.main`
+    max-width: 1111px;
+    margin: 125px auto 0 auto;
+    @media (max-width: 1199px) {
+        margin: 125px 5% 0 5%;
+    }
+    @media (max-width: 768px) {
+        margin: 125px 0 0 0;
+    }
+    @media (max-width: 375px) {
+        margin: 95px 0 0 0 ;
+    }
+`
 
 const Projects = styled.div`
     display: grid;
@@ -45,24 +60,31 @@ const PagePreview = styled.div`
 
 export default function GraphicDesign() {
     return (
-        <section>
-            <PageHeader
-                title="Graphic Design" 
-                byline="We deliver eye-catching branding materials that are tailored to meet your business objectives."
-            />
+        <HelmetProvider>
+            <Helmet>
+                <title>Graphic Design | Designo</title>
+                <meta name="author" content="Ben Hensor" />
+                <meta name="description" content="Graphic Design page for Designo - Where we bring ideas to life!" />
+            </Helmet>
+            <GraphicDesignContainer>
+                <PageHeader
+                    title="Graphic Design" 
+                    byline="We deliver eye-catching branding materials that are tailored to meet your business objectives."
+                />
 
-            <Projects>
-                <ProjectCard image={Change} title="Tim Brown" description="A book cover designed for Tim Brown’s new release, ‘Change’"/>
-                <ProjectCard image={Boxed} title="Boxed Water" description="A simple packaging concept made for Boxed Water"/>
-                <ProjectCard image={Science} title="Science!" description="A poster made in collaboration with the Federal Art Project"/>
-            </Projects>
+                <Projects>
+                    <ProjectCard image={Change} title="Tim Brown" description="A book cover designed for Tim Brown’s new release, ‘Change’"/>
+                    <ProjectCard image={Boxed} title="Boxed Water" description="A simple packaging concept made for Boxed Water"/>
+                    <ProjectCard image={Science} title="Science!" description="A poster made in collaboration with the Federal Art Project"/>
+                </Projects>
 
-            <PagePreview>
-                <PageCardWeb />
-                <PageCardApp />
-            </PagePreview>
+                <PagePreview>
+                    <PageCardWeb />
+                    <PageCardApp />
+                </PagePreview>
 
-            <CallToAction />
-        </section>
+                <CallToAction />
+            </GraphicDesignContainer>
+        </HelmetProvider>
     )
 }

@@ -22,20 +22,6 @@ const GlobalStyle = createGlobalStyle`
         overflow-x: hidden;
     }
 
-    main {
-        max-width: 1111px;
-        margin: 125px auto 0 auto;
-        @media (max-width: 1199px) {
-            margin: 125px 5% 0 5%;
-        }
-        @media (max-width: 768px) {
-            margin: 125px 0 0 0;
-        }
-        @media (max-width: 375px) {
-            margin: 95px 0 0 0 ;
-        }
-    }
-
     h1, h2, h3, h4, h5, h6, p {
         margin: 0;
     }
