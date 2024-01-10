@@ -12,7 +12,7 @@ const Hero = styled.div`
     display: grid;
     grid-template-columns: 2fr 1fr;
     border-radius: 15px;
-    overflow-y: hidden;
+    overflow: hidden;
     margin-bottom: 160px;
 
     @media screen and (max-width: 768px) {
