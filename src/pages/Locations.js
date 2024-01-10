@@ -33,6 +33,11 @@ const LocationsContainer = styled.main`
 
 const LocationCard = styled.div`
     display: flex;
+    flex-direction: ${props => {
+        if (props.$id === 'loc1' || props.$id === 'loc3') return 'row';
+        if (props.$id === 'loc2') return 'row-reverse';
+        return 'row';
+    }};
     gap: 32px;
     
 
