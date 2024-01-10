@@ -21,9 +21,11 @@ const Hero = styled.div`
         text-align: center;
         padding: 60px 10% 0 10%;
         height: 880px;
+        margin-bottom: 120px;
     }
 
     @media screen and (max-width: 375px) {
+        margin-bottom: 80px;
         padding: 60px 5% 0 5%;
     }
 `

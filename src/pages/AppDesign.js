@@ -15,11 +15,15 @@ const Projects = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
-    margin: 144px 0 160px 0;
+    margin: 0 0 160px 0;
 
     @media screen and (max-width: 768px) {
         grid-template-columns: 1fr;
-        margin: 120px 5% 160px 5%;
+        margin: 0 5% 120px 5%;
+    }
+
+    @media screen and (max-width: 375px) {
+        margin: 0 5% 80px 5%;
     }
 `
 
@@ -28,7 +32,7 @@ const PagePreview = styled.div`
     grid-template-columns: 1fr 1fr;
     height: 300px;
     gap: 24px;
-    margin: 0 0 120px 0;
+    margin: 0 0 0 0;
 
     @media screen and (max-width: 768px) {
         grid-template-columns: 1fr;
@@ -37,7 +41,7 @@ const PagePreview = styled.div`
     }
 
     @media screen and (max-width: 375px) {
-        
+        margin: 0 5% 0 5%;
     }
 `
 

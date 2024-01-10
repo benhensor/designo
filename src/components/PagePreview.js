@@ -11,14 +11,17 @@ const PagePreviewContainer = styled(motion.div)`
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 24px;
-	margin: 144px 0 0 0;
 	height: 640px;
-   
+	margin-bottom: 160px;
 
 	@media screen and (max-width: 768px) {
 		grid-template-columns: 1fr;
-		margin: 120px 5% 0 5%;
+		margin: 0 5% 120px 5%;
         height: auto;
+	}
+
+	@media screen and (max-width: 375px) {
+		margin: 0 5% 80px 5%;
 	}
 `
 

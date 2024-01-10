@@ -10,6 +10,7 @@ const StyledMap = styled.div`
     aspect-ratio: 1/1;
     border-radius: 15px;
     flex: 33%;
+    z-index: 0;
     
     @media (max-width: 768px) {
         flex: 1;

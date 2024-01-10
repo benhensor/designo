@@ -12,6 +12,7 @@ const StyledFooter = styled.footer`
     background-color: ${props => props.theme.primaryColors.black};
     display: flex;
     justify-content: center;
+    
 `
 
 const FooterContent = styled.div`
@@ -44,7 +45,7 @@ const FooterTop = styled.div`
         flex-direction: column;
         align-items: center;
         gap: 40px;
-        padding: 140px 5% 0 5%;
+        padding: 300px 0 0 0;
     }
 `
 
@@ -124,7 +125,7 @@ const FooterBottom = styled.div`
         align-items: center;
         gap: 40px;
         border-top: transparent;
-        padding: 0 5% 70px 5%;
+        padding: 0 0 70px 0;
     }
 `
 
@@ -141,7 +142,7 @@ const FooterInfo = styled.div`
         line-height: 2.6rem;
     }
 
-    @media screen and (max-width: 375px) {
+    @media screen and (max-width: 620px) {
         align-items: center;
     }
 `

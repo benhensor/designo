@@ -9,12 +9,12 @@ const IllustrationContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 32px;
-    margin: 160px 0;
+    
     
 
     @media (max-width: 768px) {
         grid-template-columns: 1fr;
-        margin: 80px 5%;
+        margin: 0 5%;
     }
 
     @media (max-width: 559px) {

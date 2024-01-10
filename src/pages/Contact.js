@@ -5,20 +5,17 @@ import ModalAlert from "../components/ModalAlert";
 import ContactPattern from "../assets/contact/desktop/bg-pattern-hero-desktop.svg";
 import LocationSelect from "../components/LocationSelect";
 import Leaf from "../assets/shared/desktop/bg-pattern-leaf.svg";
+import {ReactComponent as Error } from "../assets/contact/desktop/icon-error.svg";
 
 const ContactContainer = styled.section`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
-
-	@media (max-width: 768px) {
-		margin: 0 5%;
-	}
 `
 
 const ContactBackground = styled.div`
-	z-index: -1;
+	z-index: 0;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -58,10 +55,25 @@ const ContactHero = styled.div`
 	color: ${(props) => props.theme.primaryColors.white};
 	display: flex;
 	border-radius: 15px;
-	padding: 7%;
+	padding: 70px 5%;
 	gap: 40px;
 	margin-bottom: 160px;
-`;
+
+	@media (max-width: 809px) {
+		flex-direction: column;
+	}
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		margin: 0 5%;
+		margin-bottom: 80px;
+	}
+
+	@media (max-width: 375px) {
+		margin: 0;
+		border-radius: 0;
+	}
+`
 
 const Info = styled.div`
 	display: flex;
@@ -69,7 +81,12 @@ const Info = styled.div`
 	justify-content: center;
 	gap: 40px;
 	flex: 1;
-`;
+
+	@media (max-width: 546px) {
+		align-items: center;
+		text-align: center;
+	}
+`
 
 const ContactForm = styled.form`
 	display: flex;
@@ -88,6 +105,7 @@ const ContactForm = styled.form`
 	}
 	input,
 	textarea {
+		width: 100%;
 		padding: 18px 24px;
 		border: none;
 		font-size: 1.5rem;
@@ -98,12 +116,40 @@ const ContactForm = styled.form`
 			outline: none;
 			box-shadow: 0 2px ${(props) => props.theme.primaryColors.white};
 		}
-		input::placeholder,
+	}
+	input::placeholder,
 		textarea::placeholder {
 			color: ${(props) => props.theme.primaryColors.white};
 			opacity: 0.6;
 		}
+	div {
+		display: flex;
+		justify-content: flex-end;
+
+		@media (max-width: 546px) {
+			justify-content: center;
+		}
 	}
+`
+
+const InputWrapper = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+	position: relative;
+`
+
+const ErrorMessage = styled.p`
+	display: flex;
+	align-items: center;
+    color: ${(props) => props.theme.secondaryColors.lightGrey};
+	font-style: italic;
+    margin: 0;
+    font-size: 1rem;
+	position: absolute;
+	right: 0;
+	
 `
 
 const Button = styled.button`
@@ -117,30 +163,35 @@ const Button = styled.button`
 	font-size: 1.5rem;
 	text-transform: uppercase;
 	transition: all 0.1s ease;
-	margin-top: 24px;
+	margin-top: 40px;
 	&:hover {
 		background-color: ${(props) => props.theme.secondaryColors.lightPeach};
 		color: ${(props) => props.theme.primaryColors.white};
 	}
-`;
+`
 
 export default function Contact() {
 
-    const [showModal, setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState(false)
 
-    const handleOpenModal = () => setShowModal(true);
-    const handleCloseModal = () => setShowModal(false);
+    const handleOpenModal = () => setShowModal(true)	
+    const handleCloseModal = () => setShowModal(false)
 
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
+		reset,
 	} = useForm();
 
-	const handleRegistration = (data) => console.log(data);
-	const handleError = (errors) => {};
+	const handleRegistration = (data) => {
+		console.log(data)
+		reset()
+		handleOpenModal()
+	}
+	const handleError = (errors) => {}
 
-	let errorMsg = "Can't be empty";
+	let errorMsg = "Can't be empty"
 
 	const registerOptions = {
 		name: { required: `${errorMsg}` },
@@ -174,53 +225,65 @@ export default function Contact() {
 					action="#"
 					onSubmit={handleSubmit(handleRegistration, handleError)}
 				>
-					<label htmlFor="name">Name</label>
-					<input
-						type="text"
-						name="name"
-						id="name"
-						placeholder="Name"
-                        aria-invalid={errors.name ? 'true' : 'false'}
-						{...register('name', registerOptions.name)}
-					/>
-                    {errors.name && <p role="alert">{errors.name.message}</p>}
-					<label htmlFor="email">Email</label>
-					<input
-						type="email"
-						name="email"
-						id="email"
-						placeholder="Email Address"
-                        aria-invalid={errors.email ? 'true' : 'false'}
-                        {...register('email', registerOptions.email)}
-					/>
-                    {errors.email && <p role="alert">{errors.email.message}</p>}
-					<label htmlFor="phone">Phone Number</label>
-					<input
-						type="tel"
-						name="phone"
-						id="phone"
-						placeholder="Phone"
-                        aria-invalid={errors.phone ? 'true' : 'false'}
-                        {...register('phone', registerOptions.phone)}
-					/>
-                    {errors.phone && <p role="alert">{errors.phone.message}</p>}
-					<label htmlFor="message">Message</label>
-					<textarea
-						name="message"
-						id="message"
-						cols="10"
-						rows="5"
-						placeholder="Your Message"
-                        aria-invalid={errors.message ? 'true' : 'false'}
-                        {...register('message', registerOptions.message)}
-					/>
-                    {errors.message && <p role="alert">{errors.message.message}</p>}
-					<Button 
-                        type="submit"
-                        aria-label="Submit"
-                        onClick={handleOpenModal}>
-                        Submit
-                    </Button>
+					<InputWrapper>
+						<label htmlFor="name">Name</label>
+						<input
+							type="text"
+							name="name"
+							id="name"
+							placeholder="Name"
+							aria-invalid={errors.name ? 'true' : 'false'}
+							{...register('name', registerOptions.name)}
+						/>
+						{errors.name && <ErrorMessage role="alert">{errors.name.message}<Error style={{ marginLeft: '8px' }}/></ErrorMessage>}
+					</InputWrapper>
+					<InputWrapper>
+						<label htmlFor="email">Email</label>
+						<input
+							type="email"
+							name="email"
+							id="email"
+							placeholder="Email Address"
+							aria-invalid={errors.email ? 'true' : 'false'}
+							{...register('email', registerOptions.email)}
+						/>
+						{errors.email && <ErrorMessage role="alert">{errors.email.message}<Error style={{ marginLeft: '8px' }}/></ErrorMessage>}
+					</InputWrapper>
+					<InputWrapper>
+						<label htmlFor="phone">Phone Number</label>
+						<input
+							type="tel"
+							name="phone"
+							id="phone"
+							placeholder="Phone"
+							aria-invalid={errors.phone ? 'true' : 'false'}
+							{...register('phone', registerOptions.phone)}
+						/>
+						{errors.phone && <ErrorMessage role="alert">{errors.phone.message}<Error style={{ marginLeft: '8px' }}/></ErrorMessage>}
+					</InputWrapper>
+					<InputWrapper>	
+						<label htmlFor="message">Message</label>
+						<textarea
+							name="message"
+							id="message"
+							cols="10"
+							rows="5"
+							placeholder="Your Message"
+							aria-invalid={errors.message ? 'true' : 'false'}
+							{...register('message', registerOptions.message)}
+						/>
+                    	{errors.message && <ErrorMessage role="alert">{errors.message.message}<Error style={{ marginLeft: '8px' }}/></ErrorMessage>}
+					</InputWrapper>
+					<div>
+						<Button
+							type="submit"
+							aria-label="Submit"
+							Submit
+						>
+							Submit
+						</Button>
+					</div>
+					
 				</ContactForm>
 			</ContactHero>
 
@@ -228,9 +291,11 @@ export default function Contact() {
                 <h2>Thanks for viewing!</h2>
                 <p>Thanks for viewing my solution! I hope you enjoyed it.</p>
                 <p>If you'd like to get in touch, please visit my 
-                   <a href="https://benhensordev.netlify.app/#connect"> WEBSITE</a>.
+                   <a href="https://benhensordev.netlify.app/#connect" target="__blank" rel="noopener noreferrer"
+				   style={{ color: '#E7816B', textDecoration: 'none' }}
+				   > <strong>WEBSITE</strong></a>.
                 </p>
-                <Button onClick={handleCloseModal} style={{ width: '200px'}}>Back to Portfolio</Button>
+                <Button onClick={handleCloseModal} style={{ width: '200px'}}>Close</Button>
             </ModalAlert>
 
 			<LocationSelect />

@@ -12,14 +12,27 @@ const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     border-radius: 15px;
     color: ${props => props.theme.primaryColors.white};
-    padding: 64px 0;
-    margin-bottom: 120px;
+    padding: 64px 5%;
+    margin-bottom: 160px;
     gap: 24px;
 
     @media screen and (max-width: 768px) {
-        margin: 0 5%;
+        margin: 0 5% 120px 5%;
+    }
+
+    @media screen and (max-width: 375px) {
+        margin: 0 5% 80px 5%;
+        h1 {
+            font-size: 3.2rem;
+            line-height: 3.4rem;
+        }
+        p {
+            font-size: 1.5rem;
+            line-height: 2.4rem;
+        }
     }
 `
 

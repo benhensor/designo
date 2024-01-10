@@ -20,11 +20,9 @@ const AboutContainer = styled.section`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
 
     @media (max-width: 768px) {
-        margin: 0; 
-        gap: 80px;          
+        margin: 0;          
     }
     @media (max-width: 375px) {
         gap: 0;       
@@ -35,23 +33,24 @@ const AboutCard = styled.div`
     display: flex;
     flex-direction: ${props => {
         if (props.$id === 'first' || props.$id === 'third') return 'row';
-        if (props.$varidiant === 'second') return 'row-reverse';
+        if (props.$id === 'second') return 'row-reverse';
         return 'row';
     
     }};
     border-radius: 15px;
     overflow: hidden;
-    margin-bottom: 160px;
-
+    margin-bottom: ${props => {
+        if (props.$id === 'first' || props.$id === 'second') return '160px';
+        if (props.$id === 'third') return '0';
+    }};
     @media (max-width: 768px) {
         border-radius: 0;
-        flex-direction: ${props => {
-            if (props.$id === 'first' || props.$id === 'third') return 'column-reverse';
-            if (props.$id === 'second') return 'column-reverse';
-            return 'row';
-        
-        }};
-        margin-bottom: 80px;
+        flex-direction: column-reverse;
+        margin-bottom: ${props => {
+        if (props.$id === 'first' || props.$id === 'second') return '120px';
+        if (props.$id === 'third') return '0';
+    }}
+
     }
 
     @media (max-width: 375px) {
@@ -68,6 +67,7 @@ const Img = styled.div`
         width: 100%;
         height: 100%;
         object-fit: cover;
+        scale: 1.09
     }
 
     @media (max-width: 768px) {

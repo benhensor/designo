@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import CallToActionPattern from '../assets/shared/desktop/bg-pattern-call-to-action.svg'
@@ -6,14 +6,20 @@ import CallToActionPattern from '../assets/shared/desktop/bg-pattern-call-to-act
 const Container = styled.div`
     position: relative;
     width: 100%;
-    height: 290px;
+    height: ${props => props.$divHeight}px;
+    margin-top: 90px;
 
     @media (max-width: 768px) {
+        margin-top: 80px;
+    }
+
+    @media (max-width: 620px) {
+        height: ${props => props.$divHeight / 2}px;
         margin-top: 160px;
     }
 
     @media (max-width: 375px) {
-        margin-top: 200px;
+        margin-top: 100px;
     }
 
 `
@@ -48,6 +54,10 @@ const Content = styled.div`
         grid-template-columns: 1fr;
         width: 90%;
         
+    }
+
+    @media (max-width: 620px) {
+        bottom: -200px;
     }
 
     @media (max-width: 375px) {
@@ -112,9 +122,27 @@ const Button = styled(Link)`
 `
 
 export default function CallToAction() {
+
+    const divRef = useRef(null)
+    const [divHeight, setDivHeight] = useState(0)
+
+    const updateHeight = () => {
+        if (divRef.current) {
+        setDivHeight(divRef.current.clientHeight)
+        }
+    }
+
+    useEffect(() => {
+        updateHeight()
+        window.addEventListener('resize', updateHeight)
+
+        return () => window.removeEventListener('resize', updateHeight)
+    }, [])
+
+
     return (
-        <Container>
-            <Content>
+        <Container $divHeight={divHeight}>
+            <Content ref={divRef}>
                 <InfoContainer>
                     <h2>Let’s talk about your project</h2>
                     <p>Ready to take it to the next level? Contact us today and find out how our expertise can help your business grow.</p>

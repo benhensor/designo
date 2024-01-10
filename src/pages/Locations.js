@@ -86,7 +86,7 @@ const Block = styled.div`
 
 export default function Locations() {
 
-    const defaultZoom = 13;
+    const defaultZoom = [17];
     const defaultScroll = false;
 
     const canada = [43.64407062594163, -79.3945447653617]

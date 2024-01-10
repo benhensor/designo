@@ -24,12 +24,15 @@ const GlobalStyle = createGlobalStyle`
 
     main {
         max-width: 1111px;
-        margin: 126px auto 0 auto;
+        margin: 125px auto 0 auto;
         @media (max-width: 1199px) {
-            margin: 126px 5% 0 5%;
+            margin: 125px 5% 0 5%;
         }
         @media (max-width: 768px) {
-            margin: 130px 0 0 0;
+            margin: 125px 0 0 0;
+        }
+        @media (max-width: 375px) {
+            margin: 95px 0 0 0 ;
         }
     }
 
@@ -88,10 +91,6 @@ const GlobalStyle = createGlobalStyle`
 
     p {
         font-weight: 400;
-    }
-
-    section {
-        margin-top: 140px;
     }
 `
 
